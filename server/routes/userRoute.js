@@ -2,6 +2,7 @@ import express from "express";
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import protect from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -43,7 +44,7 @@ router.post("/login", async (req, res) => {
         .send({ message: "User not found", success: false });
     }
     const isMatch = await bcrypt.compare(req.body.password, user.password);
-    if (isMatch) {
+    if (!isMatch) {
       return res
         .status(200)
         .send({ message: "Password is incorrect", success: false });
@@ -59,6 +60,27 @@ router.post("/login", async (req, res) => {
     res
       .status(500)
       .send({ message: "Error logging in", success: false, error: error });
+  }
+});
+
+router.post("/get-user-info-by-id", protect, async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.body.userId });
+    user.password = undefined;
+    if (!user) {
+      return res
+        .status(200)
+        .send({ message: "User not found", success: false });
+    } else {
+      res.status(200).send({
+        success: true,
+        data: user,
+      });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Error getting user info", success: false, error });
   }
 });
 

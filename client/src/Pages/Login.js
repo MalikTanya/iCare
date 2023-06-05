@@ -8,11 +8,11 @@ const Login = () => {
   const navigate = useNavigate();
   const onFinish = async (values) => {
     try {
-      const response = await axios.post("/api/user/register", values);
+      const response = await axios.post("/api/user/login", values);
       if (response.data.success) {
         toast.success(response.data.message);
         toast("Redirecting to Home page...");
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.data.data);
         navigate("/");
       } else {
         toast.error(response.data.message);

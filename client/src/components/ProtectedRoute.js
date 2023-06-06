@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { showLoading, hideLoading } from "../redux/alertSlice";
 import { setUser } from "../redux/userSlice";
+import { showLoading, hideLoading } from "../redux/alertsSlice";
 
-const ProtectedRoute = (props) => {
+function ProtectedRoute(props) {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const getUser = async () => {
     try {
-      dispatch(showLoading());
+      dispatch(showLoading())
       const response = await axios.post(
         "/api/user/get-user-info-by-id",
         { token: localStorage.getItem("token") },
@@ -26,12 +26,12 @@ const ProtectedRoute = (props) => {
       if (response.data.success) {
         dispatch(setUser(response.data.data));
       } else {
-        localStorage.clear();
+        localStorage.clear()
         navigate("/login");
       }
     } catch (error) {
       dispatch(hideLoading());
-      localStorage.clear();
+      localStorage.clear()
       navigate("/login");
     }
   };
@@ -47,6 +47,6 @@ const ProtectedRoute = (props) => {
   } else {
     return <Navigate to="/login" />;
   }
-};
+}
 
 export default ProtectedRoute;

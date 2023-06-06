@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Layout from "../../components/Layout";
-import { showLoading, hideLoading } from "../../redux/alertSlice";
+import { showLoading, hideLoading } from "../../redux/alertsSlice";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { Table } from "antd";
@@ -35,7 +35,7 @@ function DoctorAppointments() {
       dispatch(showLoading());
       const resposne = await axios.post(
         "/api/doctor/change-appointment-status",
-        { appointmentId: record._id, status: status },
+        { appointmentId : record._id, status: status },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

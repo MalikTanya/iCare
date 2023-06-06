@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import { alertSlice } from "./alertSlice.js";
-import { userSlice } from "./userSlice.js";
+import { alertsSlice } from "./alertsSlice";
+import { userSlice } from "./userSlice";
 
 const rootReducer = combineReducers({
-  alerts: alertSlice.reducer,
-  user: userSlice.reducer,
+  alerts: alertsSlice.reducer,
+  user : userSlice.reducer,
 });
+
 const store = configureStore({
   reducer: rootReducer,
 });

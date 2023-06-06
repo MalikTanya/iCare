@@ -1,32 +1,32 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import { Button } from "antd";
 import { Toaster } from "react-hot-toast";
-import Home from "./Pages/Home";
+import Home from "./pages/Home";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
-import ApplyDoctor from "./Pages/ApplyDoctor";
-import Notifications from "./Pages/Notifications";
-import Userslist from "./Pages/Admin/Userslist";
-import DoctorsList from "./Pages/Admin/DoctorsList";
-import Profile from "./Pages/Doctor/Profile";
-import DoctorAppointments from "./Pages/Doctor/DoctorAppointment";
-import BookAppointment from "./Pages/BookAppointment";
-import Appointments from "./Pages/Appointments";
+import ApplyDoctor from "./pages/ApplyDoctor";
+import Notifications from "./pages/Notifications";
+import Userslist from "./pages/Admin/Userslist";
+import DoctorsList from "./pages/Admin/DoctorsList";
+import Profile from "./pages/Doctor/Profile";
+import BookAppointment from "./pages/BookAppointment";
+import Appointments from "./pages/Appointments";
+import DoctorAppointments from "./pages/Doctor/DoctorAppointments";
 import UserProfile from "./Profile";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
   return (
-    <Router>
+    <BrowserRouter>
       {loading && (
         <div className="spinner-parent">
-          <div className="spinner-border" role="status"></div>
+          <div class="spinner-border" role="status"></div>
         </div>
       )}
-
       <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route
@@ -38,6 +38,14 @@ function App() {
           }
         />
         <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          }
+        />
+        <Route
           path="/"
           element={
             <ProtectedRoute>
@@ -45,8 +53,14 @@ function App() {
             </ProtectedRoute>
           }
         />
-
-        <Route path="/profile" element={<UserProfile />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/apply-doctor"
           element={
@@ -71,6 +85,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/admin/doctorslist"
           element={
@@ -79,6 +94,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/doctor/profile/:userId"
           element={
@@ -87,14 +103,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/doctor/appointments"
-          element={
-            <ProtectedRoute>
-              <DoctorAppointments />
-            </ProtectedRoute>
-          }
-        />
+
         <Route
           path="/book-appointment/:doctorId"
           element={
@@ -111,16 +120,17 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
-          path="/register"
+          path="/doctor/appointments"
           element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
+            <ProtectedRoute>
+              <DoctorAppointments />
+            </ProtectedRoute>
           }
         />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 

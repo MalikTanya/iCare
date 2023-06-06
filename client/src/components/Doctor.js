@@ -7,7 +7,9 @@ function Doctor({ doctor }) {
     <div
       className="card p-2 cursor-pointer"
       onClick={() =>
-        navigate(`https://i-care-bay.vercel.app/book-appointment/${doctor._id}`)
+        navigate(
+          `${process.env.REACT_APP_BACKEND_URL}/book-appointment/${doctor._id}`
+        )
       }
     >
       <h1 className="card-title">

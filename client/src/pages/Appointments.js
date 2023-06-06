@@ -14,7 +14,7 @@ function Appointments() {
     try {
       dispatch(showLoading());
       const resposne = await axios.get(
-        "https://i-care-bay.vercel.app/api/user/get-appointments-by-user-id",
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/get-appointments-by-user-id`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

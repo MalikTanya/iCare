@@ -14,7 +14,7 @@ function DoctorAppointments() {
     try {
       dispatch(showLoading());
       const resposne = await axios.get(
-        "https://i-care-bay.vercel.app/api/doctor/get-appointments-by-doctor-id",
+        `${process.env.REACT_APP_BACKEND_URL}p/api/doctor/get-appointments-by-doctor-id`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -34,7 +34,7 @@ function DoctorAppointments() {
     try {
       dispatch(showLoading());
       const resposne = await axios.post(
-        "https://i-care-bay.vercel.app/api/doctor/change-appointment-status",
+        `${process.env.REACT_APP_BACKEND_URL}/api/doctor/change-appointment-status`,
         { appointmentId: record._id, status: status },
         {
           headers: {

@@ -12,7 +12,7 @@ function Home() {
     try {
       dispatch(showLoading());
       const response = await axios.get(
-        "https://i-care-bay.vercel.app/api/user/get-all-approved-doctors",
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/get-all-approved-doctors`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),

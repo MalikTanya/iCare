@@ -13,7 +13,7 @@ function Login() {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "https://i-care-bay.vercel.app/api/user/login",
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/login`,
         values
       );
       dispatch(hideLoading());

@@ -16,7 +16,7 @@ function Notifications() {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "https://i-care-bay.vercel.app/api/user/mark-all-notifications-as-seen",
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/mark-all-notifications-as-seen`,
         { userId: user._id },
         {
           headers: {
@@ -41,7 +41,7 @@ function Notifications() {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "https://i-care-bay.vercel.app/api/user/delete-all-notifications",
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/delete-all-notifications`,
         { userId: user._id },
         {
           headers: {

@@ -17,7 +17,7 @@ function ApplyDoctor() {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "https://i-care-bay.vercel.app/api/user/apply-doctor-account",
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/apply-doctor-account`,
         {
           ...values,
           userId: user._id,

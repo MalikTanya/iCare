@@ -13,7 +13,7 @@ function Userslist() {
     try {
       dispatch(showLoading());
       const resposne = await axios.get(
-        "https://i-care-bay.vercel.app/api/admin/get-all-users",
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/get-all-users`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

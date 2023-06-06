@@ -23,7 +23,7 @@ function BookAppointment() {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "https://i-care-bay.vercel.app/api/doctor/get-doctor-info-by-id",
+        `${process.env.REACT_APP_BACKEND_URL}/api/doctor/get-doctor-info-by-id`,
         {
           doctorId: params.doctorId,
         },
@@ -47,7 +47,7 @@ function BookAppointment() {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "https://i-care-bay.vercel.app/api/user/check-booking-avilability",
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/check-booking-avilability`,
         {
           doctorId: params.doctorId,
           date: date,
@@ -76,7 +76,7 @@ function BookAppointment() {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "https://i-care-bay.vercel.app/api/user/book-appointment",
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/book-appointment`,
         {
           doctorId: params.doctorId,
           userId: user._id,

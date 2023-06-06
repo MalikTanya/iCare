@@ -13,7 +13,7 @@ function Register() {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "https://i-care-bay.vercel.app/api/user/register",
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/register`,
         values
       );
       dispatch(hideLoading());

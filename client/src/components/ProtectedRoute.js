@@ -14,7 +14,7 @@ function ProtectedRoute(props) {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "https://i-care-bay.vercel.app/api/user/get-user-info-by-id",
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/get-user-info-by-id`,
         { token: localStorage.getItem("token") },
         {
           headers: {

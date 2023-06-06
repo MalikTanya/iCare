@@ -8,7 +8,7 @@ function Doctor({ doctor }) {
       className="card p-2 cursor-pointer"
       onClick={() =>
         navigate(
-          `${process.env.REACT_APP_BACKEND_URL}/book-appointment/${doctor._id}`
+          `/book-appointment/${doctor._id}`
         )
       }
     >

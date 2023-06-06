@@ -10,18 +10,21 @@ function Home() {
   const dispatch = useDispatch();
   const getData = async () => {
     try {
-      dispatch(showLoading())
-      const response = await axios.get("/api/user/get-all-approved-doctors", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
-      dispatch(hideLoading())
+      dispatch(showLoading());
+      const response = await axios.get(
+        "https://i-care-bay.vercel.app/api/user/get-all-approved-doctors",
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      dispatch(hideLoading());
       if (response.data.success) {
         setDoctors(response.data.data);
       }
     } catch (error) {
-      dispatch(hideLoading())
+      dispatch(hideLoading());
     }
   };
 

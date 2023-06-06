@@ -23,7 +23,7 @@ function BookAppointment() {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "/api/doctor/get-doctor-info-by-id",
+        "https://i-care-bay.vercel.app/api/doctor/get-doctor-info-by-id",
         {
           doctorId: params.doctorId,
         },
@@ -47,7 +47,7 @@ function BookAppointment() {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "/api/user/check-booking-avilability",
+        "https://i-care-bay.vercel.app/api/user/check-booking-avilability",
         {
           doctorId: params.doctorId,
           date: date,
@@ -76,7 +76,7 @@ function BookAppointment() {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "/api/user/book-appointment",
+        "https://i-care-bay.vercel.app/api/user/book-appointment",
         {
           doctorId: params.doctorId,
           userId: user._id,
@@ -94,9 +94,8 @@ function BookAppointment() {
 
       dispatch(hideLoading());
       if (response.data.success) {
-        
         toast.success(response.data.message);
-        navigate('/appointments')
+        navigate("/appointments");
       }
     } catch (error) {
       toast.error("Error booking appointment");
@@ -116,13 +115,12 @@ function BookAppointment() {
           </h1>
           <hr />
           <Row gutter={20} className="mt-5" align="middle">
-
             <Col span={8} sm={24} xs={24} lg={8}>
               <img
                 src="https://thumbs.dreamstime.com/b/finger-press-book-now-button-booking-reservation-icon-online-149789867.jpg"
                 alt=""
                 width="100%"
-                height='400'
+                height="400"
               />
             </Col>
             <Col span={8} sm={24} xs={24} lg={8}>
@@ -161,12 +159,14 @@ function BookAppointment() {
                     setTime(moment(value).format("HH:mm"));
                   }}
                 />
-              {!isAvailable &&   <Button
-                  className="primary-button mt-3 full-width-button"
-                  onClick={checkAvailability}
-                >
-                  Check Availability
-                </Button>}
+                {!isAvailable && (
+                  <Button
+                    className="primary-button mt-3 full-width-button"
+                    onClick={checkAvailability}
+                  >
+                    Check Availability
+                  </Button>
+                )}
 
                 {isAvailable && (
                   <Button
@@ -178,7 +178,6 @@ function BookAppointment() {
                 )}
               </div>
             </Col>
-           
           </Row>
         </div>
       )}

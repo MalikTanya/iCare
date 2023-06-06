@@ -12,7 +12,7 @@ function UserProfile() {
   const getUserData = async () => {
     try {
       const response = await axios.post(
-        "/api/user/get-user-info-by-id",
+        "https://i-care-bay.vercel.app/api/user/get-user-info-by-id",
         {
           userId: params.userId,
         },

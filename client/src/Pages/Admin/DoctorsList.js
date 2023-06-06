@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Layout from "../../components/Layout";
 import { showLoading, hideLoading } from "../../redux/alertsSlice";
-import {toast} from 'react-hot-toast'
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import { Table } from "antd";
 import moment from "moment";
@@ -13,11 +13,14 @@ function DoctorsList() {
   const getDoctorsData = async () => {
     try {
       dispatch(showLoading());
-      const resposne = await axios.get("/api/admin/get-all-doctors", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const resposne = await axios.get(
+        "https://i-care-bay.vercel.app/api/admin/get-all-doctors",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       dispatch(hideLoading());
       if (resposne.data.success) {
         setDoctors(resposne.data.data);
@@ -31,7 +34,7 @@ function DoctorsList() {
     try {
       dispatch(showLoading());
       const resposne = await axios.post(
-        "/api/admin/change-doctor-account-status",
+        "https://i-care-bay.vercel.app/api/admin/change-doctor-account-status",
         { doctorId: record._id, userId: record.userId, status: status },
         {
           headers: {
@@ -45,7 +48,7 @@ function DoctorsList() {
         getDoctorsData();
       }
     } catch (error) {
-      toast.error('Error changing doctor account status');
+      toast.error("Error changing doctor account status");
       dispatch(hideLoading());
     }
   };
@@ -69,7 +72,7 @@ function DoctorsList() {
     {
       title: "Created At",
       dataIndex: "createdAt",
-      render: (record , text) => moment(record.createdAt).format("DD-MM-YYYY"),
+      render: (record, text) => moment(record.createdAt).format("DD-MM-YYYY"),
     },
     {
       title: "status",

@@ -12,7 +12,10 @@ function Login() {
   const onFinish = async (values) => {
     try {
       dispatch(showLoading());
-      const response = await axios.post("/api/user/login", values);
+      const response = await axios.post(
+        "https://i-care-bay.vercel.app/api/user/login",
+        values
+      );
       dispatch(hideLoading());
       if (response.data.success) {
         toast.success(response.data.message);
@@ -39,15 +42,16 @@ function Login() {
             <Input placeholder="Password" type="password" />
           </Form.Item>
 
-          
-          <Button className="primary-button my-2 full-width-button" htmlType="submit">
+          <Button
+            className="primary-button my-2 full-width-button"
+            htmlType="submit"
+          >
             LOGIN
           </Button>
 
           <Link to="/register" className="anchor mt-2">
             CLICK HERE TO REGISTER
           </Link>
-         
         </Form>
       </div>
     </div>

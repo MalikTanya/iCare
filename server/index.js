@@ -4,6 +4,7 @@ import userRoute from "./routes/userRoute.js";
 import adminRoute from "./routes/adminRoute.js";
 import doctorRoute from "./routes/doctorRoute.js";
 import DBConnection from "./config/dbConfig.js";
+import morgan from "morgan";
 
 dotenv.config();
 
@@ -13,6 +14,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("API running...");
 });
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 app.use("/api/user", userRoute);
 app.use("/api/admin", adminRoute);
 app.use("/api/doctor", doctorRoute);
